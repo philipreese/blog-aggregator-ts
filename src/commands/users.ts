@@ -30,3 +30,4 @@ export async function handlerRegister(cmdName: string, ...args: string[]) {
     setUser(name);
     console.log("User created successfully!");
 }
+
