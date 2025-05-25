@@ -3,8 +3,9 @@ import os from "os";
 
 type Config = {
     dbUrl: string;
-    currentUserName?: string;
+    currentUserName: string;
 }    
+
 export function readConfig() {
     const fileName = getConfigFilePath();
     try {
