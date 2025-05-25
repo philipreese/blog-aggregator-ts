@@ -1,5 +1,6 @@
 import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands.js";
 import { handlerReset } from "./commands/reset.js";
+import { handlerAgg } from "./commands/aggregate.js";
 import { handlerLogin, handlerRegister, handlerListUsers } from "./commands/users.js";
 
 async function main() {
@@ -15,6 +16,7 @@ async function main() {
     registerCommand(commandsRegistry, "register", handlerRegister);
     registerCommand(commandsRegistry, "reset", handlerReset);
     registerCommand(commandsRegistry, "users", handlerListUsers);
+    registerCommand(commandsRegistry, "agg", handlerAgg);
 
     try {
         await runCommand(commandsRegistry, commandName, ...args);
