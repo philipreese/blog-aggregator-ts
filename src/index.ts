@@ -5,6 +5,7 @@ import { handlerLogin, handlerRegister, handlerListUsers } from "./commands/user
 import { handlerAddFeed, handlerListFeeds } from "./commands/feeds.js";
 import { handlerFollow, handlerFollowing, handlerUnfollow } from "./commands/feed-follows.js";
 import { middlewareLoggedIn } from "./middleware.js";
+import { handlerBrowse } from "./commands/browse.js";
 
 async function main() {
     const commandsRegistry: CommandsRegistry = {};
@@ -25,6 +26,7 @@ async function main() {
     registerCommand(commandsRegistry, "follow", middlewareLoggedIn(handlerFollow));
     registerCommand(commandsRegistry, "following", middlewareLoggedIn(handlerFollowing));
     registerCommand(commandsRegistry, "unfollow", middlewareLoggedIn(handlerUnfollow));
+    registerCommand(commandsRegistry, "browse", middlewareLoggedIn(handlerBrowse));
 
     try {
         await runCommand(commandsRegistry, commandName, ...args);

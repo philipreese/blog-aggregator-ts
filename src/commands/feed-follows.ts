@@ -12,13 +12,13 @@ export async function handlerFollow(cmdName: string, user: User, ...args: string
         throw new Error(`Feed with url ${args[0]} not found`);
     }
 
-    const feedFollow = await createFeedFollow(user.id!, feed.id);
+    const feedFollow = await createFeedFollow(user.id, feed.id);
     console.log("Feed follow created:");
     printFeedFollow(feedFollow.userName, feedFollow.feedName);
 }
 
 export async function handlerFollowing(_: string, user: User) {
-    const feedNames = await getFeedFollowsForUser(user.id!);
+    const feedNames = await getFeedFollowsForUser(user.id);
     if (feedNames.length === 0) {
         console.log(`No feed follows found for user ${user.name}.`);
         return;
@@ -46,7 +46,7 @@ export async function handlerUnfollow(cmdName: string, user: User, ...args: stri
         throw new Error(`Feed with url ${url} not found`);
     }
     
-    const result = await deleteFeedFollow(feed.id, user.id!);
+    const result = await deleteFeedFollow(feed.id, user.id);
     if (!result) {
         throw new Error(`Failed to unfollow feed: ${url}`);
     }

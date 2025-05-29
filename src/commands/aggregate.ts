@@ -1,4 +1,5 @@
 import { getNextFeedToFetch, markFeedFetched } from "../lib/db/queries/feeds.js";
+import { createPost } from "../lib/db/queries/posts.js";
 import { fetchFeed } from "../lib/rss.js";
 import { parseDuration } from "../lib/time.js";
 
@@ -38,13 +39,27 @@ export async function scrapeFeeds() {
     }
 
     await markFeedFetched(feed.id);
-    console.log("Fetched feeds:");
-    const fetched = await fetchFeed(feed.url);
-    for (const item of fetched.channel.items) {
-        console.log(item.title);
+    const feedData = await fetchFeed(feed.url);
+    for (const item of feedData.channel.items) {
+        console.log(`Found post: ${item.title}`);
+        await createPost({
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            title: item.title,
+            url: item.link,
+            description: item.description,
+            publishedAt: new Date(item.pubDate),
+            feedId: feed.id
+        });
     }
+
+    console.log(`Feed ${feed.name} collected, ${feedData.channel.items.length} posts found`);
 }
 
-function handleError(error: unknown) {
-    throw new Error(`Error scraping feeds: ${error instanceof Error ? error.message : error}`);
+function handleError(error: Error) {
+    if (error.message.includes("posts_url_unique")) {
+        return;
+    }
+    
+    console.error(`Error scraping feeds: ${error instanceof Error ? error.message : error}`);
 }

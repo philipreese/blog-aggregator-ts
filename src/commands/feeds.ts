@@ -11,12 +11,12 @@ export async function handlerAddFeed(cmdName: string, user: User, ...args: strin
 
     const name = args[0];
     const url = args[1];
-    const feed = await createFeed(name, url, user.id!);
+    const feed = await createFeed(name, url, user.id);
     if (!feed) {
         throw new Error("Failed to create feed");
     }
 
-    const feedFollow = await createFeedFollow(user.id!, feed.id);
+    const feedFollow = await createFeedFollow(user.id, feed.id);
     printFeedFollow(user.name, feedFollow.feedName);
     
     console.log("Feed created successfully:");
