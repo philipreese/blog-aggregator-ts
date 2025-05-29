@@ -1,4 +1,4 @@
-CREATE TABLE "feed_follows" (
+CREATE TABLE IF NOT EXISTS "feed_follows" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
