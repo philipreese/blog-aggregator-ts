@@ -8,13 +8,13 @@ To run the CLI:
 
 The list of commands with their usage:
 - ``` login <name_of_user> ```
-  - sets the currently logged-in user to specified user if they have already registered with Gator
+  - sets the currently logged-in user to specified user if they have already registered with gator
 - ``` register <name_of_user> ```
-  - registers the specified user if they have not already registered with Gator
+  - registers the specified user if they have not already registered with gator
 - ``` reset ```
-  - deletes all users from Gator
+  - deletes all users from gator
 - ``` users ```
-  - lists all registered users of Gator and indicates which is currently logged-in
+  - lists all registered users of gator and indicates which is currently logged-in
 - ``` agg <time_between_requests> ```
   - fetches posts from RSS feed urls at a specified rate
 - ``` addfeed <name_of_user> <feed_url> ```
